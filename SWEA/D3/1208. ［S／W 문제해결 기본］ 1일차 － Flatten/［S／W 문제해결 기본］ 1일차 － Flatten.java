@@ -1,18 +1,13 @@
 import java.io.*;
 import java.util.*;
-import java.lang.*;
 
-public class Solution
-{
-	public static void main(String args[]) throws Exception
-	{
-		//System.setIn(new FileInputStream("res/input.txt"));
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+public class Solution {
+	public static void main(String[] args) throws Exception {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 		
-        
 		StringTokenizer st;
-		for(int test_case = 1; test_case <= 10; test_case++)
+		for(int t = 1; t <= 10; t++)
 		{
 			// input
 			int n = Integer.parseInt(br.readLine());
@@ -23,15 +18,18 @@ public class Solution
 			}
 			// solution
 			for(int i=0; i<n; i++) {
-                Arrays.sort(map);
-				map[map.length-1]--;
-				map[0]++;
+	                Arrays.sort(map);
+	                if((map[map.length-1]-map[0]) <= 1) { // SWEA에는 없는 반례
+	                	break;
+	                }
+			map[map.length-1]--;
+			map[0]++;
 			}
-            Arrays.sort(map);
+            		Arrays.sort(map);
 			// output
-			bw.write("#"+test_case+" "+(map[map.length-1]-map[0])+"\n");
+			bw.write("#"+t+" "+(map[map.length-1]-map[0])+"\n");
 		}
-        bw.flush();
+		bw.flush();
 		bw.close();
 	}
 }
