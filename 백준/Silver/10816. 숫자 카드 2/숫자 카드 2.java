@@ -31,26 +31,22 @@ public class Main {
 		// output
 		System.out.println(sb.toString());
 	}
-
-	static int upperBound(int start, int end, int target) {
-		while(start < end) {
-			int mid = (start + end) / 2;
-			if(nNums[mid] > target) {
-				end = mid;
-			}
-			else start = mid + 1;
-		}
-		return start;
-	}
-
-	static int lowerBound(int start, int end, int target) {
-		while(start < end) {
-			int mid = (start + end) / 2;
-			if(nNums[mid] >= target) {
-				end = mid;
-			}
-			else start = mid + 1;
-		}
-		return start;
-	}
+    
+    static int upperBound(int start, int end, int target) {
+        while(start < end) {
+            int mid = (start + end) / 2;
+            if(nNums[mid] > target) end = mid;
+            else start = mid + 1;
+        }
+        return start;
+    }
+    
+    static int lowerBound(int start, int end, int target) {
+        while(start < end) {
+            int mid = (start + end) / 2;
+            if(nNums[mid] >= target) end = mid;
+            else start = mid + 1;
+        }
+        return start;
+    }
 }
