@@ -1,55 +1,48 @@
 import java.io.*;
 import java.util.*;
-import java.lang.*;
 
 public class Main {
+	static int N;
 	static int[][] map;
 	static StringBuilder sb = new StringBuilder();
 
 	public static void main(String[] args) throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
 		// input
-		int n = Integer.parseInt(br.readLine());
-		map = new int[n][n];
-		for(int r=0; r<n; r++) {
+		N = Integer.parseInt(br.readLine());
+		map = new int[N][N];
+		for(int r=0; r<N; r++) {
 			String input = br.readLine();
-			for(int c=0; c<n; c++) {
+			for(int c=0; c<N; c++) {
 				map[r][c] = input.charAt(c) - '0';
 			}
 		}
 
 		// solution
-		devide(0, 0, n);
+		solution(0, 0, N);
 
 		// output
-		bw.write(sb.toString());
-		bw.flush();
-		bw.close();
+		System.out.println(sb.toString());
 	}
 
-	static void devide(int r, int c, int length) {
-		if(isSame(r, c, length)) {
-			sb.append(map[r][c]);
+	static void solution(int sr, int sc, int size) {
+		if(isEquals(sr, sc, size)) {
+			sb.append(map[sr][sc]);
 			return;
 		}
-		int devidedLength = length/2;
-		// 압축조건에 부합하지 않으면, 4등분해서 작업반복 + 괄호 추가
 		sb.append("(");
-		devide(r, c, devidedLength);
-		devide(r, c+devidedLength, devidedLength);
-		devide(r+devidedLength, c, devidedLength);
-		devide(r+devidedLength, c+devidedLength, devidedLength);
+		solution(sr, sc, size/2);
+		solution(sr, sc+size/2, size/2);
+		solution(sr+size/2, sc, size/2);
+		solution(sr+size/2, sc+size/2, size/2);
 		sb.append(")");
 	}
 
-	static boolean isSame(int r, int c, int length) {
-		for(int tr=r; tr<r+length; tr++) {
-			for(int tc=c; tc<c+length; tc++) {
-				if(map[tr][tc] != map[r][c]) {
-					return false;
-				}
+	static boolean isEquals(int sr, int sc, int size) {
+		for(int r=sr; r<sr+size; r++) {
+			for(int c=sc; c<sc+size; c++) {
+				if(map[r][c] != map[sr][sc]) return false;
 			}
 		}
 		return true;
