@@ -3,7 +3,7 @@ import java.util.*;
 
 public class Main {
 	static int N, M;
-	static int[] truth, parents;
+	static int[] parents;
 	static boolean[] knows;
 	static int[][] participants;
 
@@ -17,7 +17,6 @@ public class Main {
 		M = Integer.parseInt(st.nextToken());
 
 		st = new StringTokenizer(br.readLine(), " ");
-		// truth = new int[Integer.parseInt(st.nextToken())];
 		knows = new boolean[N+1];
 		int cnt = Integer.parseInt(st.nextToken());
 		for (int i = 0; i < cnt; i++) {
@@ -63,7 +62,7 @@ public class Main {
 
 	static int find(int x) {
 		if (parents[x] == x) return x;
-		return find(parents[x]);
+		return parents[x] = find(parents[x]);
 	}
 
 	static boolean union(int x, int y) {
